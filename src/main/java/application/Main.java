@@ -10,16 +10,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        People p1 = new People(null, "Carlos", "Carlos@gmail.com");
-        People p2 = new People(null, "Ana", "Ana@gmail.com");
-        People p3 = new People(null, "Sara", "sara@gmail.com");
-
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        em.persist(p3);
+        People p = em.find(People.class, 4);
+        em.remove(p);
         em.getTransaction().commit();
+
+
+
+        IO.println(p);
 
         IO.println("Finish");
         em.close();
